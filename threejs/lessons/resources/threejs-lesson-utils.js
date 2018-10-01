@@ -3,6 +3,7 @@
 /* global THREE */
 
 window.threejsLessonUtils = {
+  _afterPrettifyFuncs: [],
   init() {
     if (this.renderer) {
       return;
@@ -206,6 +207,14 @@ window.threejsLessonUtils = {
     };
 
     this.renderFuncs.push(render);
+  },
+  onAfterPrettify(fn) {
+    this._afterPrettifyFuncs.push(fn);
+  },
+  afterPrettify() {
+    this._afterPrettifyFuncs.forEach((fn) => {
+      fn();
+    });
   },
 };
 
